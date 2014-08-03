@@ -26,7 +26,21 @@ do_shuffle(List, ShuffledList) ->
     % index and remove it from the list of unshuffled items.
     Index = random:uniform(Len),
     Item = lists:nth(Index, List),
-    RemainingList = lists:delete(Item, List),
+    RemainingList = remove_element(Index, List),
 
     % Process all remaining elements
     do_shuffle(RemainingList, [Item|ShuffledList]).
+
+
+-spec remove_element(ElemPos :: integer(), List :: list()) -> list().
+
+remove_element(1, List) ->
+    [_|Rest] = List,
+    Rest;
+remove_element(ElemPos, List) when length(List) == ElemPos ->
+    [_|Rest] = lists:reverse(List),
+    lists:reverse(Rest);
+remove_element(ElemPos, List) ->
+    {ListA, ListB} = lists:split(ElemPos - 1, List),
+    [_|ListC] = ListB,
+    ListA ++ ListC.

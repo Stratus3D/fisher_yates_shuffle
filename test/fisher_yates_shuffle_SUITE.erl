@@ -10,13 +10,13 @@ test_shuffle(_Config) ->
     List = [1,2,3,4,5,6,7,8,9],
 
     % should return shuffled results
-    List /= fisher_yates_shuffle:shuffle(List),
+    true = (List =/= fisher_yates_shuffle:shuffle(List)),
 
     % shuffle results should be different each time
     Result1 = fisher_yates_shuffle:shuffle(List),
     Result2 = fisher_yates_shuffle:shuffle(List),
-    Result1 /= List,
-    Result1 /= Result2,
+    true = (Result1 =/= List),
+    true = (Result1 =/= Result2),
 
     % shuffle should return all the elements
     9 = length(fisher_yates_shuffle:shuffle(List)),

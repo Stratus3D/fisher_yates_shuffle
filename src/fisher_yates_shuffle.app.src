@@ -1,0 +1,6 @@
+{application, fisher_yates_shuffle,
+  [{vsn, "0.1.0"},
+  {modules, [fisher_yates_shuffle]},
+  {registered, []},
+  {mod, {teal, []}}
+  ]}.

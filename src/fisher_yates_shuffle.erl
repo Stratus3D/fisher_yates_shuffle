@@ -1,6 +1,24 @@
 -module(fisher_yates_shuffle).
 
+-behaviour(application).
+
+-export([start/2, stop/1]).
 -export([shuffle/1]).
+
+
+%% Application callbacks
+start(_StartType, _StartArgs) ->
+    case 'TopSupervisor':start_link() of
+        {ok, Pid} ->
+            {ok, Pid};
+        Error ->
+            Error
+    end.
+
+
+stop(_State) ->
+    ok.
+
 
 -spec shuffle(List :: list()) -> list().
 

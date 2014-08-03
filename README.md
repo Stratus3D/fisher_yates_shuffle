@@ -3,6 +3,8 @@ An Implementation of the Fisher-Yates Shuffle
 
 Stratus3D
 
+**Note: The Fisher-Yates shuffle is very inefficient in Erlang due to the lack of a "Array" type. There are probably better ways of shuffle data in Erlang**
+
 ## Description
 A simple implementation of the Fisher-Yates shuffle in Erlang. More information on the Fisher-Yates shuffle is available here: ([http://bost.ocks.org/mike/shuffle/](http://bost.ocks.org/mike/shuffle/)).
 

@@ -4,6 +4,7 @@
 
 -export([start/2, stop/1]).
 -export([shuffle/1]).
+-export([improved_shuffle/1]).
 
 
 %% Application callbacks
@@ -19,7 +20,8 @@ start(_StartType, _StartArgs) ->
 stop(_State) ->
     ok.
 
-
+%% The original Fisher-Yates shuffle, which is inefficient in Erlang due to the
+%% lack of an Array type.
 -spec shuffle(List :: list()) -> list().
 
 shuffle(List) ->
@@ -48,6 +50,15 @@ do_shuffle(List, ShuffledList) ->
 
     % Process all remaining elements
     do_shuffle(RemainingList, [Item|ShuffledList]).
+
+
+%% Another shuffle algorithm that is more efficient in Erlang since it only
+%% traverses the links in the List type three times.
+-spec improved_shuffle(List :: list()) -> list().
+
+improved_shuffle(List) ->
+    Proplist = [{random:uniform(), Item} || Item <- List],
+    [Item || {_, Item} <- lists:keysort(1, Proplist)].
 
 
 -spec remove_element(ElemPos :: integer(), List :: list()) -> list().
